@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Navbar from './components/Navbar'; 
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 export default function Home() {
     const [username, setUsername] = useState("");
     const [hasJoined, setHasJoined] = useState(false);
@@ -14,10 +15,24 @@ export default function Home() {
   return (
     <>
         {hasJoined?(
-        <Navbar 
-        username={username} 
-        onLeave={() => setHasJoined(false)} 
-        />
+        <div className="h-screen flex flex-col">
+            <Navbar 
+            username={username} 
+            onLeave={() => setHasJoined(false)} 
+            />
+            <PanelGroup direction="horizontal">
+            
+            <Panel defaultSize={50} minSize={20}>
+                input
+            </Panel>
+
+            <PanelResizeHandle className="w-2 bg-neutral-700 cursor-col-resize" />
+
+            <Panel defaultSize={50} minSize={20}>
+                output
+            </Panel>
+            </PanelGroup>
+        </div>
         )
         :(
         <div className="flex flex-col min-h-screen items-center justify-center">
