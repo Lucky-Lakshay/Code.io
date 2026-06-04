@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-
+import Navbar from './components/Navbar'; 
 export default function Home() {
     const [username, setUsername] = useState("");
     const [hasJoined, setHasJoined] = useState(false);
@@ -14,10 +14,10 @@ export default function Home() {
   return (
     <>
         {hasJoined?(
-        <div>
-            <h1>Welcome to the Workspace, {username}!</h1>
-            <p>The code editor will go here.</p>
-        </div>
+        <Navbar 
+        username={username} 
+        onLeave={() => setHasJoined(false)} 
+        />
         )
         :(
         <div className="flex flex-col min-h-screen items-center justify-center">
