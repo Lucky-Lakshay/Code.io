@@ -1,4 +1,8 @@
-export default function Navbar({ username, onLeave }) {
+interface NavbarProps {
+  username: string;
+  onLeave: () => void; 
+}
+export default function Navbar({ username, onLeave }: NavbarProps) {
   return (
     <nav className="w-full flex justify-between p-2 items-center">
       <div className="font-bold">Code.io</div>
