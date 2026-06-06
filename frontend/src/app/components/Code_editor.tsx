@@ -7,6 +7,7 @@ import Editor from "@monaco-editor/react";
 export default function Code_Editor({setOutput}:OutputProps) {
   const [language, setLanguage] = useState("c");
   const editorRef = useRef<any>(null);
+  const [customInput, setCustomInput] = useState("");
   const handleEditorDidMount = (editor: any) => {
   editorRef.current = editor;
 };
@@ -31,7 +32,8 @@ export default function Code_Editor({setOutput}:OutputProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           language: language,
-          code: currentCode
+          code: currentCode,
+          input: customInput
         })
       });
 
@@ -81,6 +83,15 @@ export default function Code_Editor({setOutput}:OutputProps) {
             minimap: { enabled: false },
             fontSize: 14,
           }}
+        />
+      </div>
+      <div className="h-32 bg-neutral-900 border-t border-neutral-700 p-2 flex flex-col">
+        <span className="text-xs text-gray-400 mb-1 font-semibold uppercase tracking-wider">Custom Input (stdin)</span>
+        <textarea 
+          value={customInput}
+          onChange={(e) => setCustomInput(e.target.value)}
+          placeholder="Type inputs here, separated by spaces or newlines..."
+          className="w-full h-full bg-neutral-800 text-gray-300 text-sm p-2 rounded resize-none outline-none border border-neutral-700 focus:border-neutral-500 font-mono"
         />
       </div>
 
