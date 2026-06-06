@@ -6,6 +6,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 export default function Home() {
     const [username, setUsername] = useState("");
     const [hasJoined, setHasJoined] = useState(false);
+    const [output, setOutput] = useState("Click Run to execute...");
 
     const handleJoin = () => {
     if (username.trim() !== "") {
@@ -24,13 +25,20 @@ export default function Home() {
             <PanelGroup direction="horizontal">
             
             <Panel defaultSize={50} minSize={20}>
-                <Code_Editor/>
+                <Code_Editor 
+                setOutput={setOutput}/>
             </Panel>
 
             <PanelResizeHandle className="w-2 bg-neutral-700 cursor-col-resize" />
 
             <Panel defaultSize={50} minSize={20}>
-                output
+                <div className="h-full bg-black p-4 border-l border-neutral-700">
+                    <h3 className="text-gray-400 text-sm mb-2 font-mono">Terminal Output</h3>
+                    
+                    <pre className="text-green-400 font-mono text-sm whitespace-pre-wrap">
+                    {output}
+                    </pre>
+                </div>
             </Panel>
             </PanelGroup>
         </div>
